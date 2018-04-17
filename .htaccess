@@ -1,0 +1,4 @@
+AuthName "khang4's Realm"
+AuthType Basic
+AuthUserFile /afs/umbc.edu/users/k/h/khang4/pub/cs433/access/htpasswd-cs433
+require valid-user

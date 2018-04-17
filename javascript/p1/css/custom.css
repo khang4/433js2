@@ -1,0 +1,40 @@
+.board h1 {
+  font-size: 48px;
+  text-align: center;
+  padding: 0 0 20px 0;
+}
+.board {
+  width: 450px;
+  margin: 0 auto;
+  border: 1px solid #dddddd;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  padding: 10px;
+  background: #ffffff;
+  margin-top: 20px;
+}
+.board .span6 {
+  font-size: 16px;
+}
+.well {
+  font-size: 32px;
+  text-align: center;
+  margin-top: 5px;
+}
+.board-row {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.board-row .span4 img {
+  border: 1px solid #dddddd;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  padding: 10px;
+  cursor: pointer;
+}
+body {
+  /* bg image via http://subtlepatterns.com/ */
+  background: url(../img/starring.png);
+}

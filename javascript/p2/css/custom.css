@@ -1,0 +1,53 @@
+body {
+  /* bg image via http://subtlepatterns.com/ */
+  background: url(../img/white_texture.png);
+  padding-top: 60px;
+}
+.navbar .container, .container {
+  width: 640px;
+}
+.stretch {
+  width: 630px;
+}
+.actions {
+  text-align: right;
+  margin-top: 20px;
+}
+.actions button {
+  margin: 10px 0 0 10px;
+}
+.faux-label {
+  margin-bottom: 5px;
+  color: #333;
+}
+.emoticons {
+  text-align: center;
+}
+#messages {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  height: 200px;
+  margin-bottom: 9px;
+  font-size: 13px;
+  line-height: 18px;
+  color: #555;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: #fff;
+  overflow-y: auto;
+}
+#messages .shout {
+  padding: 4px;
+  border-bottom: 1px solid #eee;
+  line-height: 22px;
+}
+#messages .name {
+  font-weight: bold;
+}
+#messages .me {
+  background-color: #f6f6ff;
+}
