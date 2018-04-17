@@ -4,12 +4,8 @@
     <meta charset="utf-8" />
     <title>Ajax Shoutbox</title>
     <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/custom.css" /> 
-    <script>
-
-      // Insert your JavaScript here (or externalize to .js file)
-
-    </script>
+    <link rel="stylesheet" href="css/custom.css" />
+    <script src="index.js"></script>
   </head>
   <body>
 
@@ -24,62 +20,60 @@
 
     <div class="container">
       <form>
-      
         <!-- this contains the messages that are posted by all users -->
-	<div class="control-group">
+        <div class="control-group">
           <div class="faux-label">Messages:</div>
           <div class="controls">
 
-	    <!-- the actual messages go in here -->
+            <!-- the actual messages go in here -->
             <div id="messages">
 
-	      <!-- below are some sample shouts, you'll want to eventually remove
-                   but they're here to show you how they were formatted -->
-	      <div class="shout">
+              <!-- below are some sample shouts, you'll want to eventually remove
+                  but they're here to show you how they were formatted -->
+              <div class="shout">
                 <span class="timestamp">[Mar 17 1:09:25 am]</span>
-                <span class="name">Milton</span>: 
+                <span class="name">Milton</span>:
                 <span style="message">So I don't see why -</span>
               </div>
+
               <div class="shout">
                 <span class="timestamp">[Mar 17 1:09:34 am]</span>
                 <span class="name">Peter</span>:
                 <span style="message">Ok. </span>
               </div>
+
               <div class="shout">
                 <span class="timestamp">[Mar 17 1:10:59 am]</span>
                 <span class="name">Milton</span>:
                 <span style="message">The radio, I can't -</span>
               </div>
-	    
-	    </div>
-
+            </div>
           </div>
-	</div>
+        </div>
 
-	<!-- the actual name input -->
-	<div class="control-group">
+        <!-- the actual name input -->
+        <div class="control-group">
           <label class="control-label" for="name">Name:</label>
-          <div class="controls">
-            <input type="text" class="stretch" id="name" />
-          </div>
-	</div>
+            <div class="controls">
+              <input type="text" class="stretch" id="name" />
+            </div>
+        </div>
 
-	<!-- the actual messages textarea -->
-	<div class="control-group">
+        <!-- the actual messages textarea -->
+        <div class="control-group">
           <label class="control-label" for="message">Message:</label>
           <div class="controls">
             <textarea class="stretch" id="message" rows="3"></textarea>
           </div>
-	</div>
+        </div>
 
-	<!-- clear and send buttons -->
-	<div class="actions">
+        <!-- clear and send buttons -->
+        <div class="actions">
           <input type="button" class="btn btn-large" value="Clear" />
           <input type="submit" class="btn btn-large btn-primary" value="Send" />
-	</div>
+        </div>
 
       </form>
-
     </div>
   </body>
 </html>
