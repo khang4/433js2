@@ -1,9 +1,9 @@
 <?php
 
   # figure out the location of the file we're writing out
-  $path = preg_replace('/\/swe2017\/(\w+)\/.*/', '/\1/read-write/', getcwd());
+  $path = preg_replace('/\/swe2018\/(\w+)\/.*/', '/\1/read-write/', getcwd());
   $data_file = $path . 'shout.json';
-   
+
   # NOTE: If you're trying to run this at home, you might just want
   # to set $data_file to something like '/tmp/shout.json' or similar.
   # Just be sure to set it back to what's above when submitting it.
@@ -28,8 +28,8 @@
         array_pop($data);
       }
       $msg = array(
-        'name' => stripslashes($_REQUEST['name']), 
-        'message' => stripslashes($_REQUEST['message']), 
+        'name' => stripslashes($_REQUEST['name']),
+        'message' => stripslashes($_REQUEST['message']),
         'time' => date('M j g:i:s a')
       );
       array_unshift($data, $msg);
