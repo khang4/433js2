@@ -1,6 +1,16 @@
 window.onload=main;
 
+var _msgbox;
+
 function main()
+{
+    _msgbox=document.querySelector("#messages");
+
+    setevents();
+    getupdateMsgs();
+}
+
+function setevents()
 {
     var namebar=document.querySelector("#name");
     var msgbar=document.querySelector("#message");
@@ -24,10 +34,13 @@ function main()
 
         if (namebar.value=="" || msgbar.value=="")
         {
-            console.log("hey");
             namebar.focus();
             return;
         }
+
+        shoutSend(namebar.value,msgbar.value,(data)=>{
+            updateMsgs(data.data.reverse());
+        });
 
         localStorage.setItem("currentname",namebar.value);
         msgbar.value="";
@@ -36,7 +49,8 @@ function main()
     });
 }
 
-function testget()
+//callback(object)
+function getMsgs(callback)
 {
     var r=new XMLHttpRequest();
     r.open("GET","server/shout.php");
@@ -44,14 +58,16 @@ function testget()
     r.onreadystatechange=()=>{
         if (r.readyState==4)
         {
-            console.log(r.response);
+            callback(JSON.parse(r.response));
         }
     };
 
     r.send();
 }
 
-function shoutSend(name,msg)
+//given name/msg and a callback, posts the message
+//callback(object)
+function shoutSend(name,msg,callback)
 {
     var r=new XMLHttpRequest();
     r.open("POST","server/shout.php");
@@ -59,17 +75,38 @@ function shoutSend(name,msg)
     r.onreadystatechange=()=>{
         if (r.readyState==4)
         {
-            console.log(r.response);
+            callback(JSON.parse(r.response));
         }
     };
 
-    // console.log(`name=${encodeURI(name)}&message=${encodeURI(msg)}`);
     r.setRequestHeader("Content-type","application/x-www-form-urlencoded")
-    // r.send("name=Samir&message=Oh%20no!%20Not%20again!%20Why%20does%20it%20say%20paper%20jam%20when%20there%20is%20no%20paper%20jam%3F!!");
     r.send(`name=${encodeURI(name)}&message=${encodeURI(msg)}`);
 }
 
+//given a single message object, make html
 function genMsg(msgdata)
 {
-    return `<div class="shout"><span class="timestamp">[${msgdata.time}]</span><span class="name">${msgdata.name}</span>:<span>${msgdata.message}</span></div>`;
+    return `<div class="shout"><span class="timestamp">[${msgdata.time}]</span> <span class="name">${msgdata.name}</span>: <span>${msgdata.message}</span></div>`;
+}
+
+//get then update msg
+function getupdateMsgs()
+{
+    getMsgs((msgs)=>{
+        console.log(msgs);
+        updateMsgs(msgs.data.reverse());
+    });
+}
+
+//given array of msg data, update the msg box
+function updateMsgs(msgs)
+{
+    var msghtml="";
+    for (var x=0,l=msgs.length;x<l;x++)
+    {
+        msghtml+=genMsg(msgs[x]);
+    }
+
+    _msgbox.innerHTML=msghtml;
+    _msgbox.scrollTo(0,_msgbox.scrollHeight);
 }
