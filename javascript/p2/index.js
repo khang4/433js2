@@ -8,6 +8,10 @@ function main()
 
     setevents();
     getupdateMsgs();
+
+    setInterval(()=>{
+        getupdateMsgs();
+    },15000);
 }
 
 function setevents()
@@ -38,11 +42,15 @@ function setevents()
             return;
         }
 
-        shoutSend(namebar.value,msgbar.value,(data)=>{
-            updateMsgs(data.data.reverse());
-        });
+        if (checkValidMsg(namebar.value,msgbar.value))
+        {
+            shoutSend(namebar.value,msgbar.value,(data)=>{
+                updateMsgs(data.data.reverse());
+            });
 
-        localStorage.setItem("currentname",namebar.value);
+            localStorage.setItem("currentname",namebar.value);
+        }
+
         msgbar.value="";
 
         msgbar.focus();
@@ -95,6 +103,11 @@ function getupdateMsgs()
     getMsgs((msgs)=>{
         console.log(msgs);
         updateMsgs(msgs.data.reverse());
+
+        setTimeout(()=>{
+            console.log(_msgbox.scrollHeight);
+            _msgbox.scrollTo(0,_msgbox.scrollHeight);
+        },5);
     });
 }
 
@@ -108,5 +121,19 @@ function updateMsgs(msgs)
     }
 
     _msgbox.innerHTML=msghtml;
-    _msgbox.scrollTo(0,_msgbox.scrollHeight);
+
+    setTimeout(()=>{
+        console.log(_msgbox.scrollHeight);
+        _msgbox.scrollTo(0,_msgbox.scrollHeight);
+    },5);
+}
+
+function checkValidMsg(name,msg)
+{
+    if (name.match(/\w|[\u3000-\u303f\u3040-\u309f\u30a0-\u30ff\uff00-\uff9f\u4e00-\u9faf\u3400-\u4dbf]/) && msg.match(/\w|[\u3000-\u303f\u3040-\u309f\u30a0-\u30ff\uff00-\uff9f\u4e00-\u9faf\u3400-\u4dbf]/))
+    {
+        return 1;
+    }
+
+    return 0;
 }
