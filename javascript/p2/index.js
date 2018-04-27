@@ -101,11 +101,9 @@ function genMsg(msgdata)
 function getupdateMsgs()
 {
     getMsgs((msgs)=>{
-        console.log(msgs);
         updateMsgs(msgs.data.reverse());
 
         setTimeout(()=>{
-            console.log(_msgbox.scrollHeight);
             _msgbox.scrollTo(0,_msgbox.scrollHeight);
         },5);
     });
@@ -123,7 +121,6 @@ function updateMsgs(msgs)
     _msgbox.innerHTML=msghtml;
 
     setTimeout(()=>{
-        console.log(_msgbox.scrollHeight);
         _msgbox.scrollTo(0,_msgbox.scrollHeight);
     },5);
 }

@@ -37,7 +37,16 @@ function getcurrentviewinfo()
         centre.lng,
         _map.distance(_map.getBounds()._northEast,centre),
         (data)=>{
-            console.log(data);
+            data=data.query.pages;
+            if (!data)
+            {
+                return;
+            }
+
+            for (var x in data)
+            {
+                L.marker([data[x].coordinates[0].lat,data[x].coordinates[0].lon]).addTo(_map);
+            }
         }
     );
 }
