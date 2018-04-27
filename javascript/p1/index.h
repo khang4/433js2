@@ -20,6 +20,9 @@ class _boardcontroller
     int highscore;
     element highscoree;
 
+    int spawnspeed;
+    interval spawnfunction;
+
     void holeEvents();
     void setupbuttons();
 
@@ -27,7 +30,11 @@ class _boardcontroller
     void runTimer();
     void resetGame();
     void startGameAction();
+    void molespawn();
 
+    //make random mole go up. sets the currentup
     void randomUp();
     void setHoleState(int index,int state);
+
+    void setspawnspeed(int speed); //set new spawn speed
 }

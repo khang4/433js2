@@ -29,6 +29,8 @@ class _boardcontroller
 
         this.highscoree.innerText=this.highscore;
 
+        this.spawnspeed=800;
+
         this.holeEvents();
         this.setupbuttons();
     }
@@ -55,13 +57,6 @@ class _boardcontroller
                 this.scorenum++;
                 this.score.innerText=this.scorenum;
                 this.setHoleState(e.currentTarget.index,0);
-
-                setTimeout(()=>{
-                    if (this.gamestate==1)
-                    {
-                        this.randomUp();
-                    }
-                },500);
             });
         }
     }
@@ -116,6 +111,7 @@ class _boardcontroller
             this.gamestate=0;
             this.timer.innerText="game over";
             clearInterval(this.timerfunction);
+            clearInterval(this.spawnfunction);
 
             if (this.scorenum>this.highscore)
             {
@@ -138,6 +134,11 @@ class _boardcontroller
             clearInterval(this.timerfunction);
         }
 
+        if (this.spawnfunction)
+        {
+            clearInterval(this.spawnfunction);
+        }
+
         this.gamestate=0;
         this.time=0;
         this.timer.innerText=0;
@@ -158,9 +159,15 @@ class _boardcontroller
             this.time=30;
             this.timer.innerText=30;
             this.gamestate=1;
+
             this.timerfunction=setInterval(()=>{
                 this.runTimer();
             },1000);
+
+            this.spawnfunction=setInterval(()=>{
+                this.molespawn();
+            },this.spawnspeed);
+
             this.randomUp();
         }
 
@@ -179,6 +186,20 @@ class _boardcontroller
                 this.gamestate=1;
             }
         }
+    }
+
+    molespawn()
+    {
+        if (this.gamestate==1)
+        {
+            this.setHoleState(this.currentUp,0);
+            this.randomUp();
+        }
+    }
+
+    setspawnspeed(speed)
+    {
+        this.spawnspeed=speed;
     }
 }
 
