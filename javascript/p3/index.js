@@ -29,6 +29,7 @@ function getwiki(lat,long,rad,callback)
     r.send();
 }
 
+var _currentmarkers;
 function getcurrentviewinfo()
 {
     var centre=_map.getCenter();
@@ -43,9 +44,16 @@ function getcurrentviewinfo()
                 return;
             }
 
+            if (_currentmarkers)
+            {
+                _map.removeLayer(_currentmarkers);
+            }
+
+            _currentmarkers=L.layerGroup().addTo(_map);
+
             for (var x in data)
             {
-                L.marker([data[x].coordinates[0].lat,data[x].coordinates[0].lon]).addTo(_map);
+                L.marker([data[x].coordinates[0].lat,data[x].coordinates[0].lon]).addTo(_currentmarkers);
             }
         }
     );
