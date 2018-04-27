@@ -1,33 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
- 	   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
-   integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
-   crossorigin=""/>
-           <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
-   integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
-   crossorigin=""></script>
-        <style>
-                #places {height:100vh; width:17vw; float:left;padding-left:10px;overflow-y:scroll;}
-                #mapid { height: 100vh; width: 80vw; float:right; }
-                article{border-bottom:1px solid black;padding-bottom:10px;width:90%;font-family:sans-serif;}
-                .preview{display:none;}
-	</style>
-    <title>Maps + Wikipedia Mashup</title>
 
-  </head>
+<head>
+  <meta charset="utf-8" />
 
-  <body>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
+  <script src="index.js"></script>
 
-    <!-- list of places goes here. I've set up some styles to use if you use the correct elements and classes -->
-    <div id="places">
-         <h2>ARTICLES</h2>
-    </div>
+  <style>
+    #places {
+      height: 100vh;
+      width: 17vw;
+      float: left;
+      padding-left: 10px;
+      overflow-y: scroll;
+    }
 
-    <!-- actual map should be built out in here -->    
-    <div id="map">
-    </div>
-    
-  </body>
+    #mapid {
+      height: 100vh;
+      width: 80vw;
+      float: right;
+    }
+
+    article {
+      border-bottom: 1px solid black;
+      padding-bottom: 10px;
+      width: 90%;
+      font-family: sans-serif;
+    }
+
+    .preview {
+      display: none;
+    }
+  </style>
+
+  <title>Maps + Wikipedia Mashup</title>
+
+</head>
+
+<body>
+
+  <!-- list of places goes here. I've set up some styles to use if you use the correct elements and classes -->
+  <div id="places">
+    <h2>ARTICLES</h2>
+  </div>
+
+  <!-- actual map should be built out in here -->
+  <div id="mapid">
+
+  </div>
+
+</body>
 </html>
