@@ -67,13 +67,13 @@ body
 
 .article .info
 {
-    height: 0;
+    display: none;
     font-size: 15px;
-    overflow: hidden;
 }
 
 .article a
 {
+    display: none;
     font-size: 12px;
 }
 
@@ -84,5 +84,10 @@ body
 
 .article.selected .info
 {
-    height: auto;
+    display: block;
+}
+
+.article.selected a
+{
+    display: inline;
 }

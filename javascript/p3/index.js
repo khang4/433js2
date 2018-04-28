@@ -16,6 +16,14 @@ function main()
         accessToken: 'pk.eyJ1IjoiaG15a2FuYWUiLCJhIjoiY2pnaWVlZWtrMDBvdzMzcXU3NTh1dzZqOSJ9.uC6teVGtYf5YkPCgrFB9oQ'
     }).addTo(_map);
 
+    _map.on("zoom",(e)=>{
+        getcurrentviewinfo();
+    });
+
+    _map.on("moveend",(e)=>{
+        getcurrentviewinfo();
+    });
+
     getcurrentviewinfo();
 }
 
@@ -51,6 +59,13 @@ function getcurrentviewinfo()
 
             if (_currentmarkers)
             {
+                var markers=_currentmarkers._layers;
+
+                for (var x in markers)
+                {
+                    _sidebararticles.removeChild(markers[x].article);
+                }
+
                 _map.removeLayer(_currentmarkers);
             }
 
@@ -60,8 +75,6 @@ function getcurrentviewinfo()
             var newarticle;
             for (var x in data)
             {
-                console.log(data[x]);
-
                 if (!data[x].thumbnail)
                 {
                     data[x].thumbnail={source:null};
