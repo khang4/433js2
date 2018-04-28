@@ -19,10 +19,29 @@ body
     vertical-align: top;
 }
 
+#mapid
+{
+    width: 80%;
+    height: 100%;
+}
+
+/*-- popup --*/
+.popup a
+{
+    font-size: 15px;
+}
+
+.popup img
+{
+    width: 300px;
+}
+
+/*-- side bar general --*/
 .places
 {
     width: 20%;
     height: 100%;
+    overflow: auto;
 }
 
 .places h2
@@ -32,8 +51,26 @@ body
     box-sizing: border-box;
 }
 
-#mapid
+/*-- sidebar articles --*/
+.article
 {
-    width: 80%;
-    height: 100%;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.article h3
+{
+    font-size: 20px;
+    margin: 5px 0 5px 0;
+}
+
+.article .info
+{
+    font-size: 15px;
+}
+
+.article a
+{
+    font-size: 12px;
 }
