@@ -52,12 +52,6 @@ function getcurrentviewinfo()
         centre.lng,
         _map.distance(_map.getBounds()._northEast,centre),
         (data)=>{
-            data=data.query.pages;
-            if (!data)
-            {
-                return;
-            }
-
             if (_currentmarkers)
             {
                 var markers=_currentmarkers._layers;
@@ -68,7 +62,15 @@ function getcurrentviewinfo()
                 }
 
                 _map.removeLayer(_currentmarkers);
+                _currentmarkers=null;
             }
+
+            if (!(data.query && data.query.pages))
+            {
+                return;
+            }
+
+            data=data.query.pages;
 
             _currentmarkers=L.featureGroup().addTo(_map);
 
