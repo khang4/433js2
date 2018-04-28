@@ -7,7 +7,8 @@ var _currentopenarticle;
 function main()
 {
     _sidebararticles=document.querySelector(".articles");
-    _map=L.map("mapid").setView([51.505, -0.09], 13);
+    // _map=L.map("mapid").setView([51.505, -0.09], 13);
+    _map=L.map("mapid").setView([57.22685714755715,18.37497711181641],12);
 
     L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}",
     {
@@ -45,7 +46,6 @@ function getwiki(lat,long,rad,callback)
 var _currentmarkers;
 function getcurrentviewinfo()
 {
-    console.log("updated");
     var centre=_map.getCenter();
     getwiki(
         centre.lat,
@@ -67,6 +67,8 @@ function getcurrentviewinfo()
 
             if (!(data.query && data.query.pages))
             {
+                console.log("no articles");
+                console.log(data);
                 return;
             }
 
