@@ -45,6 +45,7 @@ function getwiki(lat,long,rad,callback)
 var _currentmarkers;
 function getcurrentviewinfo()
 {
+    console.log("updated");
     var centre=_map.getCenter();
     getwiki(
         centre.lat,
@@ -126,11 +127,11 @@ function genpopup(link,name,img)
     return `<div class="popup"><a href="${link}" target="_blank">${name}</a>${img}`;
 }
 
-function genarticle(link,title,info)
-{
-    //from article-gen.html
-    return `<div class="article collapse"><h3 class="title">${title}</h3><div class="info">${info}</div><a href="${link}" target="_blank">wikipedia article</a></div>`;
-}
+// function genarticle(link,title,info)
+// {
+//     //from article-gen.html
+//     return `<div class="article collapse"><h3 class="title">${title}</h3><div class="info">${info}</div><a href="${link}" target="_blank">wikipedia article</a></div>`;
+// }
 
 function genarticleelement(link,title,info)
 {
