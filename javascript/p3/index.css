@@ -67,10 +67,22 @@ body
 
 .article .info
 {
+    height: 0;
     font-size: 15px;
+    overflow: hidden;
 }
 
 .article a
 {
     font-size: 12px;
+}
+
+.article.selected
+{
+    background-color: #cddaa2;
+}
+
+.article.selected .info
+{
+    height: auto;
 }

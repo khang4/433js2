@@ -1,8 +1,8 @@
 window.onload=main;
 
 var _map;
-var _popup;
 var _sidebararticles;
+var _currentopenarticle;
 
 function main()
 {
@@ -16,7 +16,7 @@ function main()
         accessToken: 'pk.eyJ1IjoiaG15a2FuYWUiLCJhIjoiY2pnaWVlZWtrMDBvdzMzcXU3NTh1dzZqOSJ9.uC6teVGtYf5YkPCgrFB9oQ'
     }).addTo(_map);
 
-    _popup=L.popup().setContent(`<p style="font-size:10px">hey</p>`);
+    getcurrentviewinfo();
 }
 
 function getwiki(lat,long,rad,callback)
@@ -56,6 +56,8 @@ function getcurrentviewinfo()
 
             _currentmarkers=L.featureGroup().addTo(_map);
 
+            var newmarker;
+            var newarticle;
             for (var x in data)
             {
                 console.log(data[x]);
@@ -70,14 +72,26 @@ function getcurrentviewinfo()
                     data[x].extract="";
                 }
 
-                L.marker([data[x].coordinates[0].lat,data[x].coordinates[0].lon])
+                newmarker=L.marker([data[x].coordinates[0].lat,data[x].coordinates[0].lon])
                     .bindPopup(genpopup(data[x].canonicalurl,data[x].title,data[x].thumbnail.source)).addTo(_currentmarkers);
 
-                _sidebararticles.insertAdjacentHTML("beforeend",genarticle(data[x].canonicalurl,data[x].title,data[x].extract));
+                newarticle=genarticleelement(data[x].canonicalurl,data[x].title,data[x].extract);
+
+                newmarker.article=newarticle;
+
+                _sidebararticles.insertAdjacentElement("beforeend",newarticle);
             }
 
             _currentmarkers.on("click",(e)=>{
+                if (_currentopenarticle)
+                {
+                    _currentopenarticle.classList.remove("selected");
+                }
 
+                e.layer.article.classList.add("selected");
+
+                _currentopenarticle=e.layer.article;
+                _currentopenarticle.scrollIntoView();
             });
         }
     );
@@ -95,10 +109,20 @@ function genpopup(link,name,img)
         img=`<img src="${img}"></div>`;
     }
 
+    //from popup-gen.html
     return `<div class="popup"><a href="${link}" target="_blank">${name}</a>${img}`;
 }
 
 function genarticle(link,title,info)
 {
-    return `<div class="article"><h3 class="title">${title}</h3><div class="info">${info}</div><a href="${link}">wikipedia article</a></div>`;
+    //from article-gen.html
+    return `<div class="article collapse"><h3 class="title">${title}</h3><div class="info">${info}</div><a href="${link}" target="_blank">wikipedia article</a></div>`;
+}
+
+function genarticleelement(link,title,info)
+{
+    var res=document.createElement("div");
+    res.innerHTML=`<div class="article"><h3 class="title">${title}</h3><div class="info">${info}</div><a href="${link}" target="_blank">wikipedia article</a></div>`;
+
+    return res.firstChild;
 }
