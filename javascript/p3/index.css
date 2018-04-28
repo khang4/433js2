@@ -1,0 +1,39 @@
+html
+{
+    width: 100%;
+    height: 100%;
+}
+
+body
+{
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 0;
+    font-family: roboto,メイリオ,meiryo,arial,sans-serif;
+}
+
+.map-top
+{
+    display: inline-block;
+    vertical-align: top;
+}
+
+.places
+{
+    width: 20%;
+    height: 100%;
+}
+
+.places h2
+{
+    font-size: 25px;
+    padding: 0 10px 0 10px;
+    box-sizing: border-box;
+}
+
+#mapid
+{
+    width: 80%;
+    height: 100%;
+}

@@ -3,12 +3,15 @@
 
 <head>
   <meta charset="utf-8" />
+  <title>Maps + Wikipedia Mashup</title>
+
+  <link rel="stylesheet" href="index.css">
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="" />
   <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
   <script src="index.js"></script>
 
-  <style>
+  <!-- <style>
     #places {
       height: 100vh;
       width: 17vw;
@@ -33,21 +36,18 @@
     .preview {
       display: none;
     }
-  </style>
-
-  <title>Maps + Wikipedia Mashup</title>
-
+  </style> -->
 </head>
 
 <body>
 
   <!-- list of places goes here. I've set up some styles to use if you use the correct elements and classes -->
-  <div id="places">
-    <h2>ARTICLES</h2>
+  <div class="places map-top">
+    <h2>articles</h2>
   </div>
 
   <!-- actual map should be built out in here -->
-  <div id="mapid">
+  <div id="mapid" class="map-top">
 
   </div>
 
