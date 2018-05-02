@@ -10,7 +10,7 @@ function main()
     getupdateMsgs();
 
     setInterval(()=>{
-        getupdateMsgs();
+        getupdateMsgs(0);
     },15000);
 }
 
@@ -98,19 +98,15 @@ function genMsg(msgdata)
 }
 
 //get then update msg
-function getupdateMsgs()
+function getupdateMsgs(scrolldown=1)
 {
     getMsgs((msgs)=>{
-        updateMsgs(msgs.data.reverse());
-
-        setTimeout(()=>{
-            _msgbox.scrollTo(0,_msgbox.scrollHeight);
-        },5);
+        updateMsgs(msgs.data.reverse(),scrolldown);
     });
 }
 
 //given array of msg data, update the msg box
-function updateMsgs(msgs)
+function updateMsgs(msgs,scrolldown=1)
 {
     var msghtml="";
     for (var x=0,l=msgs.length;x<l;x++)
@@ -120,9 +116,12 @@ function updateMsgs(msgs)
 
     _msgbox.innerHTML=msghtml;
 
-    setTimeout(()=>{
-        _msgbox.scrollTo(0,_msgbox.scrollHeight);
-    },5);
+    if (scrolldown)
+    {
+        setTimeout(()=>{
+            tryScrollBot(5);
+        },5);
+    }
 }
 
 function checkValidMsg(name,msg)
@@ -133,4 +132,18 @@ function checkValidMsg(name,msg)
     }
 
     return 0;
+}
+
+function tryScrollBot(attempt)
+{
+    if (attempt<=0)
+    {
+        return;
+    }
+
+    _msgbox.scrollTop=_msgbox.scrollHeight;
+
+    setTimeout(()=>{
+        tryScrollBot(attempt-1);
+    },10);
 }

@@ -1,0 +1,93 @@
+html
+{
+    width: 100%;
+    height: 100%;
+}
+
+body
+{
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 0;
+    font-family: roboto,メイリオ,meiryo,arial,sans-serif;
+}
+
+.map-top
+{
+    display: inline-block;
+    vertical-align: top;
+}
+
+#mapid
+{
+    width: 80%;
+    height: 100%;
+}
+
+/*-- popup --*/
+.popup a
+{
+    font-size: 15px;
+}
+
+.popup img
+{
+    width: 300px;
+}
+
+/*-- side bar general --*/
+.places
+{
+    width: 20%;
+    height: 100%;
+    overflow: auto;
+}
+
+.places h2
+{
+    font-size: 25px;
+    padding: 0 10px 0 10px;
+    box-sizing: border-box;
+}
+
+/*-- sidebar articles --*/
+.article
+{
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.article h3
+{
+    font-size: 20px;
+    margin: 5px 0 5px 0;
+}
+
+.article .info
+{
+    display: none;
+    font-size: 15px;
+}
+
+.article a
+{
+    display: none;
+    font-size: 12px;
+}
+
+.article.selected
+{
+    background-color: #cddaa2;
+}
+
+.article.selected .info
+{
+    display: block;
+}
+
+.article.selected a
+{
+    display: inline;
+}
