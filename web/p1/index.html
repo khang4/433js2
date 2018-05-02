@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="./css/fullcalendar.css" />
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+    <link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/smoothness/jquery-ui.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js"></script>
+    <script src="./js/fullcalendar.min.js"></script>
+    <script src="./js/calendar-ajax.js"></script>
+    <script>
+
+      // change this to point to your server-side script - this
+      // should be the only thing you need to change in JavaScript
+    
+      var SERVER_SIDE_SCRIPT = './events.php';
+
+    </script>
+    <title>Calendar</title>
+  </head>
+  <body>
+    <div id="cal-wrapper">
+      <div id="calendar"></div>
+    </div>
+    <div id="event-create" title="Create New Event" style="display: none">
+      <form>
+        <fieldset>
+          <div>
+            <label for="title-create">Title:</label>
+            <input type="text" name="title-create" id="title-create" value="" class="text ui-widget-content ui-corner-all col1of1" />
+          </div>
+          <div>
+            <label for="from-create" class="col1of2">From:</label>
+            <label for="to-create" class="col2of2">To:</label>
+          </div>
+          <div>
+            <input type="text" name="from-create" id="from-create" class="text ui-widget-content ui-corner-all col1of2" />
+            <input type="text" name="to-create" id="to-create" class="text ui-widget-content ui-corner-all col2of2" />
+          </div>
+        </fieldset>
+      </form>
+    </div>
+    <div id="event-details" title="Event Details" style="display: none">
+      <form>
+        <fieldset>
+          <div>
+            <label for="title-details">Title:</label>
+            <input type="text" name="title-details" id="title-details" value="" class="text ui-widget-content ui-corner-all col1of1" readonly="readonly" />
+            <input type="hidden" name="id-details" id="id-details" />
+          </div>
+          <div>
+            <label for="from-details" class="col1of2">From:</label>
+            <label for="to-details" class="col2of2">To:</label>
+            <input type="text" name="from-details" id="from-details" class="text ui-widget-content ui-corner-all col1of2" readonly="readonly" />
+            <input type="text" name="to-details" id="to-details" class="text ui-widget-content ui-corner-all col2of2" readonly="readonly" />
+          </div>
+        </fieldset>
+      </form>
+    </div>
+    <div id="event-delete" title="Delete Event?" style="display: none">
+    </div>
+    <div id="error-message" title="Error!" style="display: none">
+    </div>
+  </body>
+</html>
