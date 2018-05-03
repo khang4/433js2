@@ -10,7 +10,25 @@
             $data=array();
         }
 
-        echo json_encode($data);
+        if (array_key_exists("start",$_REQUEST))
+        {
+            $filtereddata=array();
+            for ($x=0;$x<count($data);$x++)
+            {
+                if ($data[$x]->start>=$_REQUEST["start"]
+                    || $data[$x]->end<=$_REQUEST["end"])
+                {
+                    $filtereddata[]=$data[$x];
+                }
+            }
+        }
+
+        else
+        {
+            $filtereddata=$data;
+        }
+
+        echo json_encode($filtereddata);
     }
 
     else if ($_SERVER['REQUEST_METHOD']=='POST')

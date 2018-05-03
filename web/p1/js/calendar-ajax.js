@@ -29,7 +29,6 @@ $(document).ready(function() {
             }),
             // if we get a response
             success: function(response) {
-              console.log(response);
               // if that response is good
               if(response.result) {
                 $('#event-create').dialog('close');

@@ -21,7 +21,7 @@ function posttest(body)
     r.send(body);
 }
 
-function gettest()
+function gettest(body)
 {
     var r=new XMLHttpRequest();
     r.open("GET","events.php");
@@ -34,5 +34,6 @@ function gettest()
         }
     };
 
-    r.send();
+    r.setRequestHeader("Content-type","text/plain");
+    r.send(body);
 }
