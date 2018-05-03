@@ -15,8 +15,9 @@
             $filtereddata=array();
             for ($x=0;$x<count($data);$x++)
             {
-                if ($data[$x]->start>=$_REQUEST["start"]
-                    || $data[$x]->end<=$_REQUEST["end"])
+                if (($data[$x]->start>=$_REQUEST["start"] && $data[$x]->start<=$_REQUEST["end"])
+                    || ($data[$x]->end<=$_REQUEST["end"] && $data[$x]->end>=$_REQUEST["start"])
+                    || ($data[$x]->start<=$_REQUEST["start"] && $data[$x]->end>=$_REQUEST["end"]))
                 {
                     $filtereddata[]=$data[$x];
                 }
