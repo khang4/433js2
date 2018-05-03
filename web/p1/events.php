@@ -1,7 +1,7 @@
 <?php
     if ($_SERVER['REQUEST_METHOD']=='GET')
     {
-        $data=json_decode(@file_get_contents("..\..\..\..\cs433\read-write\events.json",true));
+        $data=json_decode(@file_get_contents("../../../../cs433/read-write/events.json",true));
 
         if ($data==NULL)
         {
@@ -13,13 +13,61 @@
 
     else if ($_SERVER['REQUEST_METHOD']=='POST')
     {
-        $postdata=json_decode(file_get_contents('php://input'));
+        $originalpost=file_get_contents('php://input');
+        $postdata=json_decode($originalpost);
 
         if ($postdata==NULL)
         {
-            $postdata=array("result"=>"false","message"=>"json error");
+            $postdata=array(
+                "result"=>false,
+                "message"=>"json error",
+                "originaldata"=>$originalpost
+            );
+
+            echo json_encode($postdata);
+            file_put_contents("../../../../cs433/read-write/error.txt",$originalpost,LOCK_EX);
+            return;
         }
 
-        echo json_encode($postdata);
+        if ($postdata->action=="create")
+        {
+            $data=json_decode(@file_get_contents("../../../../cs433/read-write/events.json",true));
+
+            if ($data==NULL)
+            {
+                $data=array();
+            }
+
+            unset($postdata->action);
+            $postdata->id=hash('md5',$postdata->title.$postdata->start.$postdata->end);
+
+            // $postdata=array(
+            //     'id'=>$postdata->title+$postdata->start+$postdata->end,
+            //     'title'=>$postdata->title,
+            //     'start'=>$postdata->start,
+            //     'end'=>$postdata->end
+            // );
+
+            $data[]=$postdata;
+
+            file_put_contents("../../../../cs433/read-write/events.json",json_encode($data),LOCK_EX);
+
+            echo json_encode(array(
+                "result"=>true
+            ));
+        }
+
+        else if ($postdata->action=="delete")
+        {
+
+        }
+
+        else
+        {
+            echo json_encode(array(
+                "result"=>false,
+                "message"=>"action not recognised"
+            ));
+        }
     }
 ?>

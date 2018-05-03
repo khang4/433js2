@@ -20,15 +20,16 @@ $(document).ready(function() {
             url: SERVER_SIDE_SCRIPT,
             type: 'POST',
             dataType: 'json',
-            data: {
-              'action': 'create',
-              'title': $('#title-create').val(),
+            data: JSON.stringify({
+              action: 'create',
+              title: $('#title-create').val(),
               // start == 00:00:00 of selected day, end = 23:59:50 of stop day
-              'start': new Date(parseInt(from[3],10), parseInt(from[1],10) - 1, parseInt(from[2],10)).getTime() / 1000,
-              'end': new Date(parseInt(to[3],10), parseInt(to[1],10) - 1, parseInt(to[2],10), 23, 59, 59).getTime() / 1000
-            },
+              start: new Date(parseInt(from[3],10), parseInt(from[1],10) - 1, parseInt(from[2],10)).getTime() / 1000,
+              end: new Date(parseInt(to[3],10), parseInt(to[1],10) - 1, parseInt(to[2],10), 23, 59, 59).getTime() / 1000
+            }),
             // if we get a response
             success: function(response) {
+              console.log(response);
               // if that response is good
               if(response.result) {
                 $('#event-create').dialog('close');
@@ -86,11 +87,11 @@ $(document).ready(function() {
           url: SERVER_SIDE_SCRIPT,
           type: 'POST',
           dataType: 'json',
-          data: {
+          data: JSON.stringify({
             'action': 'delete',
             'id': $('#id-details').val()
-          },
-          // if we get a response 
+          }),
+          // if we get a response
           success: function(response) {
             $('#event-delete').dialog('close');
             // successful delete
@@ -107,7 +108,7 @@ $(document).ready(function() {
             $('#event-delete').dialog('close');
             $('#error-message').html(status).dialog('open');
           }
-        }); 
+        });
       },
       // simply dismiss on cancel
       'Cancel': function() {
@@ -126,7 +127,7 @@ $(document).ready(function() {
       }
     }
   });
-    
+
 
   // setup full calendar
   $('#calendar').fullCalendar({
@@ -152,5 +153,5 @@ $(document).ready(function() {
       $('#event-create').dialog('open');
     }
   });
-		
+
 });
