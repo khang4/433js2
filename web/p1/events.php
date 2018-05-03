@@ -1,7 +1,9 @@
 <?php
+    $eventdatafilepath="../../../../cs433/read-write/events.json";
+
     if ($_SERVER['REQUEST_METHOD']=='GET')
     {
-        $data=json_decode(@file_get_contents("../../../../cs433/read-write/events.json",true));
+        $data=json_decode(@file_get_contents($eventdatafilepath,true));
 
         if ($data==NULL)
         {
@@ -31,7 +33,7 @@
 
         if ($postdata->action=="create")
         {
-            $data=json_decode(@file_get_contents("../../../../cs433/read-write/events.json",true));
+            $data=json_decode(@file_get_contents($eventdatafilepath,true));
 
             if ($data==NULL)
             {
@@ -43,7 +45,7 @@
 
             $data[]=$postdata;
 
-            file_put_contents("../../../../cs433/read-write/events.json",json_encode($data),LOCK_EX);
+            file_put_contents($eventdatafilepath,json_encode($data),LOCK_EX);
 
             echo json_encode(array(
                 "result"=>true
@@ -52,7 +54,7 @@
 
         else if ($postdata->action=="delete")
         {
-            $data=json_decode(@file_get_contents("../../../../cs433/read-write/events.json",true));
+            $data=json_decode(@file_get_contents($eventdatafilepath,true));
 
             for ($x=0;$x<count($data);$x++)
             {
@@ -63,7 +65,7 @@
                 }
             }
 
-            file_put_contents("../../../../cs433/read-write/events.json",json_encode(array_values($data)),LOCK_EX);
+            file_put_contents($eventdatafilepath,json_encode(array_values($data)),LOCK_EX);
 
             echo json_encode(array(
                 "result"=>true
