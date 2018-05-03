@@ -41,13 +41,6 @@
             unset($postdata->action);
             $postdata->id=hash('md5',$postdata->title.$postdata->start.$postdata->end);
 
-            // $postdata=array(
-            //     'id'=>$postdata->title+$postdata->start+$postdata->end,
-            //     'title'=>$postdata->title,
-            //     'start'=>$postdata->start,
-            //     'end'=>$postdata->end
-            // );
-
             $data[]=$postdata;
 
             file_put_contents("../../../../cs433/read-write/events.json",json_encode($data),LOCK_EX);
@@ -59,7 +52,22 @@
 
         else if ($postdata->action=="delete")
         {
+            $data=json_decode(@file_get_contents("../../../../cs433/read-write/events.json",true));
 
+            for ($x=0;$x<count($data);$x++)
+            {
+                if ($data[$x]->id==$postdata->id)
+                {
+                    unset($data[$x]);
+                    break;
+                }
+            }
+
+            file_put_contents("../../../../cs433/read-write/events.json",json_encode(array_values($data)),LOCK_EX);
+
+            echo json_encode(array(
+                "result"=>true
+            ));
         }
 
         else
