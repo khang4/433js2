@@ -9,6 +9,13 @@ body
     background-color: rgba(37,55,46,.7);
 }
 
+.wrap
+{
+    width: 900px;
+    margin: auto;
+}
+
+/*-- file list entries --*/
 dt,dd
 {
     font-size: 15px;
@@ -16,8 +23,7 @@ dt,dd
 
 .file-list
 {
-    width: 900px;
-    margin: auto;
+    width: 100%;
     margin-top: 50px;
 }
 
@@ -69,4 +75,14 @@ dd.mod-time
 dd.delete
 {
     width: 90px;
+}
+
+/*-- upload zone --*/
+.upload-zone
+{
+    display: inline-block;
+    width: 400px;
+    height: 100px;
+    border: 1px dashed white;
+    margin: 25px 0 0 18px;
 }
