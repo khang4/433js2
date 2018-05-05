@@ -3,4 +3,65 @@
 body
 {
     margin: 0;
+    font-family: "Hiragino Kaku Gothic Pro","Hiragino Kaku Gothic ProN","ヒラギノ角ゴ Pro W3","ヒラギノ角ゴ ProN W3",roboto,meiryo,"メイリオ",arial;
+    font-size: 0;
+    color: white;
+    background-color: rgba(37,55,46,.7);
+}
+
+dt,dd
+{
+    font-size: 15px;
+}
+
+.file-list
+{
+    width: 900px;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.file-list dl
+{
+    display: inline-block;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+    cursor: pointer;
+    padding: 5px 0 5px 0;
+    box-sizing: border-box;
+}
+
+.file-list dl:hover
+{
+    background-color: rgba(0,0,0,.2);
+}
+
+.file-list dt
+{
+    display: inline-block;
+    width: 360px;
+    word-break: break-all;
+    padding-left: 5px;
+    box-sizing: border-box;
+}
+
+.file-list dd
+{
+    display: inline-block;
+    width: 150px;
+    margin: 0;
+}
+
+dd.size
+{
+    width: 100px;
+}
+
+dd.mod-time
+{
+    width: 200px;
+}
+
+dd.delete
+{
+    width: 90px;
 }
