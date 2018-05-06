@@ -24,6 +24,9 @@ p
 dt,dd
 {
     font-size: 15px;
+    padding: 5px 0 5px 0;
+    padding-left: 5px;
+    box-sizing: border-box;
 }
 
 .file-list
@@ -37,7 +40,6 @@ dt,dd
     display: inline-block;
     border-bottom: 1px solid rgba(255,255,255,.1);
     cursor: pointer;
-    padding: 5px 0 5px 0;
     box-sizing: border-box;
     transition: background-color .2s;
 }
@@ -57,8 +59,6 @@ dl.table-label,dl.table-label:hover
     display: inline-block;
     width: 360px;
     word-break: break-all;
-    padding-left: 5px;
-    box-sizing: border-box;
 }
 
 .file-list dd
@@ -78,9 +78,10 @@ dd.mod-time
     width: 200px;
 }
 
-dd.delete
+dd.delete,.file-list .table-label dd.delete:hover
 {
     width: 90px;
+    background-color: transparent;
 }
 
 dd.delete span
@@ -90,6 +91,16 @@ dd.delete span
     padding: 4px 23px 4px 23px;
     box-sizing: border-box;
     border-radius: 22px;
+}
+
+.table-label dt,.table-label dd
+{
+    transition: background-color .2s;
+}
+
+.table-label dt:hover,.table-label dd:hover
+{
+    background-color: rgba(255,255,255,.35);
 }
 
 /*-- upload zone --*/
