@@ -24,10 +24,19 @@ function uploadformdata(formdata,callback)
     r.onreadystatechange=()=>{
         if (r.readyState==4)
         {
-            callback(JSON.parse(r.response));
+            try
+            {
+                callback(JSON.parse(r.response));
+            }
+
+            catch (err)
+            {
+                console.log(r.response);
+            }
         }
     };
 
+    r.setRequestHeader("method","upload");
     r.send(formdata);
 }
 
@@ -49,7 +58,7 @@ function getfilelist(callback)
 function updatefilelist()
 {
     getfilelist((data)=>{
-        console.log(data);
+        // console.log(data);
 
         for (var x=0,l=data.length;x<l;x++)
         {
