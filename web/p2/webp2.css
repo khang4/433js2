@@ -39,6 +39,7 @@ dt,dd
     cursor: pointer;
     padding: 5px 0 5px 0;
     box-sizing: border-box;
+    transition: background-color .2s;
 }
 
 .file-list dl:hover
@@ -80,6 +81,15 @@ dd.mod-time
 dd.delete
 {
     width: 90px;
+}
+
+dd.delete span
+{
+    font-size: 13px;
+    background-color: #FF6F00;
+    padding: 4px 23px 4px 23px;
+    box-sizing: border-box;
+    border-radius: 22px;
 }
 
 /*-- upload zone --*/
