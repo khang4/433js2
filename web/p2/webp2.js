@@ -2,11 +2,17 @@ window.onload=main;
 
 var _filelist;
 
+var _fileinputs;
+var _inputcounter;
+
 function main()
 {
     _filelist=document.querySelector(".file-list");
+    _fileinputs=document.querySelector(".file-inputs");
+    _inputcounter=document.querySelector(".filecount");
 
     updatefilelist();
+    setupuploadzone();
 }
 
 function testupload()
@@ -71,4 +77,45 @@ function genfilelistentry(data)
 
     res.innerHTML=`<dl><dt>${data.name}</dt><dd>${data.size}</dd><dd class="type">${data.type}</dd><dd class="mod-time">${data.modtime}</dd><dd class="delete"><span>delete</span></dd></dl>`;
     return res.firstElementChild;
+}
+
+
+function setupuploadzone()
+{
+    document.querySelector(".actual.add-file").addEventListener("click",(e)=>{
+        var inputs=_fileinputs.querySelectorAll("input");
+
+        var foundempty=0;
+        for (var x=0;x<inputs.length;x++)
+        {
+            if (!inputs[x].value)
+            {
+                //if already found an empty input, delete all other empty inputs
+                if (foundempty>0)
+                {
+                    _fileinputs.removeChild(inputs[x]);
+                }
+
+                foundempty++;
+            }
+        }
+
+        if (inputs.length>=5 && foundempty==0)
+        {
+            foundempty=1;
+        }
+
+        _inputcounter.innerText=`${(inputs.length+1)-foundempty}/5`;
+
+        if (inputs.length>=5)
+        {
+            return;
+        }
+
+        //if have not found an empty input, add it
+        if (!foundempty)
+        {
+            _fileinputs.insertAdjacentHTML("beforeend",`<input class="user-file" type="file">`);
+        }
+    });
 }

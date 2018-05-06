@@ -124,6 +124,7 @@ dd.delete span
     border-radius: 50%;
     margin: 19px auto 19px auto;
     cursor: pointer;
+    user-select: none;
     transition: background-color .2s;
 }
 
