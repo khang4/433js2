@@ -10,32 +10,35 @@
             $filelist=array();
         }
 
-        $sortstate=json_decode($_SERVER["HTTP_SORTSTATE"]);
-
-        if ($sortstate!=NULL)
+        if (array_key_exists("HTTP_SORTSTATE",$_SERVER))
         {
-            switch ($sortstate->sortmode)
+            $sortstate=json_decode($_SERVER["HTTP_SORTSTATE"]);
+
+            if ($sortstate!=NULL)
             {
-                case 0:
-                usort($filelist,"alphabetisename");
-                break;
+                switch ($sortstate->sortmode)
+                {
+                    case 0:
+                    usort($filelist,"alphabetisename");
+                    break;
 
-                case 1:
-                usort($filelist,"sortsize");
-                break;
+                    case 1:
+                    usort($filelist,"sortsize");
+                    break;
 
-                case 2:
-                usort($filelist,"alphabetisetype");
-                break;
+                    case 2:
+                    usort($filelist,"alphabetisetype");
+                    break;
 
-                case 3:
-                usort($filelist,"sortmodtime");
-                break;
-            }
+                    case 3:
+                    usort($filelist,"sortmodtime");
+                    break;
+                }
 
-            if ($sortstate->order==1)
-            {
-                $filelist=array_reverse($filelist);
+                if ($sortstate->order==1)
+                {
+                    $filelist=array_reverse($filelist);
+                }
             }
         }
 
@@ -79,11 +82,11 @@
                 $modtime=filemtime($file["tmp_name"]);
                 $filelist[]=array(
                     "name"=>$file["name"],
-                    "size"=>$file["size"],
-                    "hsize"=>humansize($file["size"]),
+                    "size"=>humansize($file["size"]),
+                    "asize"=>$file["size"],
                     "type"=>typeconvert($realfiletype),
                     "modtime"=>$modtime,
-                    "id"=>hash("md5",$file["name"].$modtime)
+                    "id"=>hash("md5",$file["name"].$modtime.$file["size"]) //this is a bad hash but whatever
                 );
 
                 $resultsarray[]=array(
@@ -155,7 +158,7 @@
 
     function sortsize($file1,$file2)
     {
-        return $file1->size-$file2->size;
+        return $file1->asize-$file2->asize;
     }
 
     function sortmodtime($file1,$file2)
