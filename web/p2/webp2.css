@@ -96,6 +96,7 @@ dd.delete span
 .table-label dt,.table-label dd
 {
     transition: background-color .2s;
+    user-select: none;
 }
 
 .table-label dt:hover,.table-label dd:hover

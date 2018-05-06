@@ -10,7 +10,34 @@
             $filelist=array();
         }
 
-        usort($filelist,"alphabetise",0);
+        $sortstate=json_decode($_SERVER["HTTP_SORTSTATE"]);
+
+        if ($sortstate!=NULL)
+        {
+            switch ($sortstate->sortmode)
+            {
+                case 0:
+                usort($filelist,"alphabetisename");
+                break;
+
+                case 1:
+                usort($filelist,"sortsize");
+                break;
+
+                case 2:
+                usort($filelist,"alphabetisetype");
+                break;
+
+                case 3:
+                usort($filelist,"sortmodtime");
+                break;
+            }
+
+            if ($sortstate->order==1)
+            {
+                $filelist=array_reverse($filelist);
+            }
+        }
 
         echo json_encode($filelist);
     }
@@ -116,31 +143,23 @@
         return "unsupported";
     }
 
-    //alphabetise by name (set field=0) or type (>1)
-    function alphabetise($file1,$file2,$field=0)
+    function alphabetisename($file1,$file2)
     {
-        if ($field==0)
-        {
-            return strcmp($file1->name,$file2->name);
-        }
-
-        else
-        {
-            return strcmp($file1->type,$file2->type);
-        }
+        return strcmp($file1->name,$file2->name);
     }
 
-    //sort by size (0) or modtime (>1)
-    function sortnumber($file1,$file2,$field=0)
+    function alphabetisetype($file1,$file2)
     {
-        if ($field==0)
-        {
-            return $file1->size-$file2->size;
-        }
+        return strcmp($file1->type,$file2->type);
+    }
 
-        else
-        {
-            return $file1->modtime-$file2->modtime;
-        }
+    function sortsize($file1,$file2)
+    {
+        return $file1->size-$file2->size;
+    }
+
+    function sortmodtime($file1,$file2)
+    {
+        return $file1->modtime-$file2->modtime;
     }
 ?>

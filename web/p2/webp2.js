@@ -5,6 +5,12 @@ var _filelist;
 var _fileinputs;
 var _inputcounter;
 
+/* sortmode:
+   0:name,1:size,2:type,3:modtime
+   order:
+   0:descending,1:ascending*/
+var _sortstate={sortmode:0,order:0};
+
 function main()
 {
     _filelist=document.querySelector(".file-list span");
@@ -13,6 +19,7 @@ function main()
 
     updatefilelist();
     setupuploadzone();
+    setupsorts();
 }
 
 //give it form data of files, callback(object response) from serverside
@@ -60,6 +67,7 @@ function getfilelist(callback)
         }
     };
 
+    r.setRequestHeader("sortstate",JSON.stringify(_sortstate));
     r.send();
 }
 
@@ -192,4 +200,29 @@ function genuploadstatus(response,filename="")
     }
 
     return `<div class="upload-statusbox ${statusclass}">${statusstring}</div>`;
+}
+
+function setupsorts()
+{
+    var tablelabel=document.querySelector(".table-label");
+
+    for (var x=0;x<4;x++)
+    {
+        tablelabel.children[x].sortstate=x;
+
+        tablelabel.children[x].addEventListener("click",(e)=>{
+            if (_sortstate.sortmode==e.currentTarget.sortstate)
+            {
+                _sortstate.order++;
+
+                if (_sortstate.order>1)
+                {
+                    _sortstate.order=0;
+                }
+            }
+
+            _sortstate.sortmode=e.currentTarget.sortstate;
+            updatefilelist();
+        });
+    }
 }
