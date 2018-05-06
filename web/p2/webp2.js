@@ -7,7 +7,7 @@ var _inputcounter;
 
 function main()
 {
-    _filelist=document.querySelector(".file-list");
+    _filelist=document.querySelector(".file-list span");
     _fileinputs=document.querySelector(".file-inputs");
     _inputcounter=document.querySelector(".filecount");
 
@@ -68,6 +68,7 @@ function updatefilelist()
     getfilelist((data)=>{
         // console.log(data);
 
+        _filelist.innerHTML="";
         for (var x=0,l=data.length;x<l;x++)
         {
             _filelist.appendChild(genfilelistentry(data[x]));
@@ -153,6 +154,8 @@ function setupuploadzone()
                 liveinputs[x].insertAdjacentHTML("afterend",genuploadstatus(res[x],liveinputs[x].files[0].name));
                 _fileinputs.removeChild(liveinputs[x]);
             }
+
+            updatefilelist();
         });
     });
 }
@@ -179,7 +182,7 @@ function genuploadstatus(response,filename="")
             break;
 
         case "invalidsize":
-            statusstring-`${filename} is an invalid size`;
+            statusstring=`${filename} is an invalid size`;
             statusclass="fail";
             break;
 
