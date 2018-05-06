@@ -177,7 +177,7 @@ dd.delete span
 /*-- file inputs --*/
 .file-inputs
 {
-    width: 300px;
+    width: 320px;
 }
 
 .file-inputs input
@@ -191,4 +191,16 @@ dd.delete span
     height: 30px;
     font-size: 13px;
     line-height: 30px;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+
+.upload-statusbox.fail
+{
+    background-color: rgba(196,62,108,.4);
+}
+
+.upload-statusbox.succ
+{
+    background-color: rgba(149,170,69,.41);
 }

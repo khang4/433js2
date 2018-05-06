@@ -25,25 +25,26 @@
             }
 
             $finfo=finfo_open(FILEINFO_MIME_TYPE);
+            $resultsarray=array();
             foreach ($_FILES as $file)
             {
                 $realfiletype=finfo_file($finfo,$file["tmp_name"]);
                 $typeconvertfiletype=typeconvert($realfiletype);
                 if ($file["size"]>500000)
                 {
-                    echo json_encode(array(
+                    $resultsarray[]=array(
                         "status"=>"invalidsize"
-                    ));
-                    return;
+                    );
+                    continue;
                 }
 
                 if ($typeconvertfiletype=="unsupported")
                 {
-                    echo json_encode(array(
+                    $resultsarray[]=array(
                         "status"=>"invalidtype",
                         "type"=>$realfiletype
-                    ));
-                    return;
+                    );
+                    continue;
                 }
 
                 $filelist[]=array(
@@ -52,13 +53,15 @@
                     "type"=>typeconvert($realfiletype),
                     "modtime"=>filemtime($file["tmp_name"])
                 );
+
+                $resultsarray[]=array(
+                    "status"=>"uploaded"
+                );
             }
 
             file_put_contents($filelistpath,json_encode($filelist),LOCK_EX);
 
-            echo json_encode(array(
-                "status"=>"uploaded"
-            ));
+            echo json_encode($resultsarray);
         }
 
         else

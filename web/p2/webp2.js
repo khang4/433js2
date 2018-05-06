@@ -48,7 +48,15 @@ function getfilelist(callback)
     r.onreadystatechange=()=>{
         if (r.readyState==4)
         {
-            callback(JSON.parse(r.response));
+            try
+            {
+                callback(JSON.parse(r.response));
+            }
+
+            catch (err)
+            {
+                console.log(r.response);
+            }
         }
     };
 
@@ -121,6 +129,7 @@ function setupuploadzone()
 
     document.querySelector(".upload-button").addEventListener("click",(e)=>{
         var inputs=_fileinputs.querySelectorAll("input");
+        var liveinputs=[];
 
         var uploadform=new FormData();
         for (var x=0;x<inputs.length;x++)
@@ -131,10 +140,53 @@ function setupuploadzone()
             }
 
             uploadform.append(`file${x}`,inputs[x].files[0]);
+            liveinputs.push(inputs[x]);
         }
 
         uploadformdata(uploadform,(res)=>{
             console.log(res);
+
+            _inputcounter.innerText=`${inputs.length-liveinputs.length}/5`;
+
+            for (var x=0;x<res.length;x++)
+            {
+                liveinputs[x].insertAdjacentHTML("afterend",genuploadstatus(res[x],liveinputs[x].files[0].name));
+                _fileinputs.removeChild(liveinputs[x]);
+            }
         });
     });
+}
+
+function genuploadstatus(response,filename="")
+{
+    if (filename.length>15)
+    {
+        filename=filename.slice(0,15)+"...";
+    }
+
+    var statusstring;
+    var statusclass;
+    switch (response.status)
+    {
+        case "uploaded":
+            statusstring=`${filename} uploaded.`;
+            statusclass="succ";
+            break;
+
+        case "invalidtype":
+            statusstring=`${filename} type is not allowed`;
+            statusclass="fail";
+            break;
+
+        case "invalidsize":
+            statusstring-`${filename} is an invalid size`;
+            statusclass="fail";
+            break;
+
+        default:
+            statusstring=`(${filename}) unknown status.`;
+            statusclass="fail";
+    }
+
+    return `<div class="upload-statusbox ${statusclass}">${statusstring}</div>`;
 }
