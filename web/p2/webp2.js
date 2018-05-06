@@ -15,7 +15,8 @@ function main()
     setupuploadzone();
 }
 
-function testupload()
+//give it form data of files, callback(object response) from serverside
+function uploadformdata(formdata,callback)
 {
     var r=new XMLHttpRequest();
     r.open("POST","webp2.php");
@@ -23,21 +24,11 @@ function testupload()
     r.onreadystatechange=()=>{
         if (r.readyState==4)
         {
-            console.log(r.response);
+            callback(JSON.parse(r.response));
         }
     };
 
-    var userfiles=document.querySelectorAll(".upload-zone .user-file");
-    var uploadform=new FormData();
-    for (var x=0;x<userfiles.length;x++)
-    {
-        if (userfiles[x].files[0])
-        {
-            uploadform.append(`file${x}`,userfiles[x].files[0]);
-        }
-    }
-
-    r.send(uploadform);
+    r.send(formdata);
 }
 
 function getfilelist(callback)
@@ -117,5 +108,24 @@ function setupuploadzone()
         {
             _fileinputs.insertAdjacentHTML("beforeend",`<input class="user-file" type="file">`);
         }
+    });
+
+    document.querySelector(".upload-button").addEventListener("click",(e)=>{
+        var inputs=_fileinputs.querySelectorAll("input");
+
+        var uploadform=new FormData();
+        for (var x=0;x<inputs.length;x++)
+        {
+            if (!inputs[x].value)
+            {
+                continue;
+            }
+
+            uploadform.append(`file${x}`,inputs[x].files[0]);
+        }
+
+        uploadformdata(uploadform,(res)=>{
+            console.log(res);
+        });
     });
 }
