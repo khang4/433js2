@@ -10,6 +10,8 @@
             $filelist=array();
         }
 
+        usort($filelist,"alphabetise",0);
+
         echo json_encode($filelist);
     }
 
@@ -47,11 +49,14 @@
                     continue;
                 }
 
+                $modtime=filemtime($file["tmp_name"]);
                 $filelist[]=array(
                     "name"=>$file["name"],
-                    "size"=>humansize($file["size"]),
+                    "size"=>$file["size"],
+                    "hsize"=>humansize($file["size"]),
                     "type"=>typeconvert($realfiletype),
-                    "modtime"=>filemtime($file["tmp_name"])
+                    "modtime"=>$modtime,
+                    "id"=>hash("md5",$file["name"].$modtime)
                 );
 
                 $resultsarray[]=array(
@@ -109,5 +114,33 @@
         }
 
         return "unsupported";
+    }
+
+    //alphabetise by name (set field=0) or type (>1)
+    function alphabetise($file1,$file2,$field=0)
+    {
+        if ($field==0)
+        {
+            return strcmp($file1->name,$file2->name);
+        }
+
+        else
+        {
+            return strcmp($file1->type,$file2->type);
+        }
+    }
+
+    //sort by size (0) or modtime (>1)
+    function sortnumber($file1,$file2,$field=0)
+    {
+        if ($field==0)
+        {
+            return $file1->size-$file2->size;
+        }
+
+        else
+        {
+            return $file1->modtime-$file2->modtime;
+        }
     }
 ?>
