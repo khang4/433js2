@@ -82,6 +82,13 @@ dd.delete,.file-list .table-label dd.delete:hover
 {
     width: 90px;
     background-color: transparent;
+    padding-left: 2px;
+    opacity: .5;
+}
+
+.file-list dl:hover dd.delete
+{
+    opacity: 1;
 }
 
 dd.delete span
@@ -91,6 +98,12 @@ dd.delete span
     padding: 4px 23px 4px 23px;
     box-sizing: border-box;
     border-radius: 22px;
+    transition: background-color .2s;
+}
+
+dd.delete span:hover
+{
+    background-color: #F6A21E;
 }
 
 .table-label dt,.table-label dd

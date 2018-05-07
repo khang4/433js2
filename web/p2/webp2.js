@@ -118,17 +118,17 @@ function genfilelistentry(data)
 
     res.innerHTML=`<dl><dt>${data.name}</dt><dd>${data.size}</dd><dd class="type">${data.type}</dd><dd class="mod-time">${data.modtime}</dd><dd class="delete"><span>delete</span></dd></dl>`;
 
-    var deletebutton=res.firstElementChild.querySelector(".delete");
+    var deletebutton=res.firstChild.querySelector(".delete");
 
-    deletebutton.id=data.id;
+    deletebutton.fileid=data.id;
 
     deletebutton.addEventListener("click",(e)=>{
-        deleteid(e.currentTarget.id);
+        deleteid(e.currentTarget.fileid);
 
         _filelist.removeChild(e.currentTarget.parentElement);
     });
 
-    return res.firstElementChild;
+    return res.firstChild;
 }
 
 
