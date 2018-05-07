@@ -127,6 +127,7 @@
             {
                 if ($filelist[$x]->id==$deleteid)
                 {
+                    unlink("../../../../cs433/read-write/p2/uploads/{$deleteid}");
                     unset($filelist[$x]);
                     break;
                 }
