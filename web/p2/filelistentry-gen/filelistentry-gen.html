@@ -1,8 +1,10 @@
 <!-- used by genfilelistentry(), placed in div .file-list -->
-<dl>
-  <dt>${data.name}</dt>
-  <dd>${data.size}</dd>
-  <dd class="type">${data.type}</dd>
-  <dd class="mod-time">${data.modtime}</dd>
-  <dd class="delete"><span>delete</span></dd>
-</dl>
+<a href="webp2.php?fileget=${data.id}">
+  <dl>
+    <dt>${data.name}</dt>
+    <dd>${data.size}</dd>
+    <dd class="type">${data.type}</dd>
+    <dd class="mod-time">${data.modtime}</dd>
+    <dd class="delete"><span>delete</span></dd>
+  </dl>
+</a>

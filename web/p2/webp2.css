@@ -20,6 +20,11 @@ p
     margin: 0;
 }
 
+a
+{
+    color: white;
+}
+
 /*-- file list entries --*/
 dt,dd
 {

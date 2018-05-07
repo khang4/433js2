@@ -118,16 +118,19 @@ function genfilelistentry(data)
     data.modtime=new Date(data.modtime*1000);
     data.modtime=`${data.modtime.toISOString().slice(0,10)} ${data.modtime.toTimeString().slice(0,8)}`;
 
-    res.innerHTML=`<dl><dt>${data.name}</dt><dd>${data.size}</dd><dd class="type">${data.type}</dd><dd class="mod-time">${data.modtime}</dd><dd class="delete"><span>delete</span></dd></dl>`;
+    // res.innerHTML=`<dl><dt>${data.name}</dt><dd>${data.size}</dd><dd class="type">${data.type}</dd><dd class="mod-time">${data.modtime}</dd><dd class="delete"><span>delete</span></dd></dl>`;
+    res.innerHTML=`<a href="webp2.php?fileget=${data.id}"><dl><dt>${data.name}</dt><dd>${data.size}</dd><dd class="type">${data.type}</dd><dd class="mod-time">${data.modtime}</dd><dd class="delete"><span>delete</span></dd></dl></a>`;
 
     var deletebutton=res.firstChild.querySelector(".delete");
 
     deletebutton.fileid=data.id;
 
     deletebutton.addEventListener("click",(e)=>{
+        e.preventDefault();
+
         deleteid(e.currentTarget.fileid);
 
-        _filelist.removeChild(e.currentTarget.parentElement);
+        _filelist.removeChild(e.currentTarget.parentElement.parentElement);
     });
 
     return res.firstChild;
