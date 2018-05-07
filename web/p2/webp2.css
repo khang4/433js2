@@ -49,11 +49,6 @@ dt,dd
     background-color: rgba(0,0,0,.2);
 }
 
-dl.table-label,dl.table-label:hover
-{
-    background-color: rgba(255,255,255,.35);
-}
-
 .file-list dt
 {
     display: inline-block;
@@ -106,6 +101,7 @@ dd.delete span:hover
     background-color: #F6A21E;
 }
 
+/*-- file list label --*/
 .table-label dt,.table-label dd
 {
     transition: background-color .2s;
@@ -115,6 +111,23 @@ dd.delete span:hover
 .table-label dt:hover,.table-label dd:hover
 {
     background-color: rgba(255,255,255,.35);
+}
+
+dl.table-label,dl.table-label:hover
+{
+    background-color: rgba(255,255,255,.35);
+}
+
+.table-label dt.selected::after,
+.table-label dd.selected::after
+{
+    content: "▾";
+}
+
+.table-label.orderup dt.selected::after,
+.table-label.orderup dd.selected::after
+{
+    content: "▴";
 }
 
 /*-- upload zone --*/

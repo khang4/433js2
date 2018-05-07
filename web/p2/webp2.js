@@ -11,6 +11,8 @@ var _inputcounter;
    0:descending,1:ascending*/
 var _sortstate={sortmode:0,order:0};
 
+var _currentsortcol;
+
 function main()
 {
     _filelist=document.querySelector(".file-list span");
@@ -241,6 +243,7 @@ function setupsorts()
 {
     var tablelabel=document.querySelector(".table-label");
 
+    _currentsortcol=tablelabel.children[0];
     for (var x=0;x<4;x++)
     {
         tablelabel.children[x].sortstate=x;
@@ -248,15 +251,25 @@ function setupsorts()
         tablelabel.children[x].addEventListener("click",(e)=>{
             if (_sortstate.sortmode==e.currentTarget.sortstate)
             {
-                _sortstate.order++;
-
-                if (_sortstate.order>1)
+                if (_sortstate.order>0)
                 {
                     _sortstate.order=0;
+                    tablelabel.classList.remove("orderup");
+                }
+
+                else
+                {
+                    _sortstate.order=1;
+                    tablelabel.classList.add("orderup");
                 }
             }
 
             _sortstate.sortmode=e.currentTarget.sortstate;
+
+            _currentsortcol.classList.remove("selected");
+            e.currentTarget.classList.add("selected");
+            _currentsortcol=e.currentTarget;
+
             updatefilelist();
         });
     }
