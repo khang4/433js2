@@ -15,7 +15,7 @@ body
     margin: auto;
 }
 
-p
+p,h3,ul,li
 {
     margin: 0;
 }
@@ -37,7 +37,7 @@ dt,dd
 .file-list
 {
     width: 100%;
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 .file-list dl
@@ -246,4 +246,13 @@ dl.table-label,dl.table-label:hover
 .upload-statusbox.succ
 {
     background-color: rgba(149,170,69,.41);
+}
+
+/*-- readme box --*/
+.readme-box
+{
+    margin-top: 30px;
+    font-size: 13px;
+    padding: 5px;
+    background-color: rgba(255,255,255,.15);
 }

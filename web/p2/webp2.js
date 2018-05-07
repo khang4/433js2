@@ -121,7 +121,7 @@ function genfilelistentry(data)
     // res.innerHTML=`<dl><dt>${data.name}</dt><dd>${data.size}</dd><dd class="type">${data.type}</dd><dd class="mod-time">${data.modtime}</dd><dd class="delete"><span>delete</span></dd></dl>`;
     res.innerHTML=`<a href="webp2.php?fileget=${data.id}"><dl><dt>${data.name}</dt><dd>${data.size}</dd><dd class="type">${data.type}</dd><dd class="mod-time">${data.modtime}</dd><dd class="delete"><span>delete</span></dd></dl></a>`;
 
-    var deletebutton=res.firstChild.querySelector(".delete");
+    var deletebutton=res.firstChild.querySelector(".delete span");
 
     deletebutton.fileid=data.id;
 
@@ -130,7 +130,7 @@ function genfilelistentry(data)
 
         deleteid(e.currentTarget.fileid);
 
-        _filelist.removeChild(e.currentTarget.parentElement.parentElement);
+        _filelist.removeChild(e.currentTarget.parentElement.parentElement.parentElement);
     });
 
     return res.firstChild;
