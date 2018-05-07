@@ -10,6 +10,20 @@
             $filelist=array();
         }
 
+        if (array_key_exists("fileget",$_REQUEST))
+        {
+            for ($x=0;$x<count($filelist);$x++)
+            {
+                if ($filelist[$x]->id==$_REQUEST["fileget"])
+                {
+                    header("content-type: {$filelist[$x]->ctype}");
+                    header("Content-Disposition: filename='{$filelist[$x]->name}'");
+                    echo file_get_contents("../../../../cs433/read-write/p2/uploads/{$filelist[$x]->id}");
+                    return;
+                }
+            }
+        }
+
         if (array_key_exists("HTTP_SORTSTATE",$_SERVER))
         {
             $sortstate=json_decode($_SERVER["HTTP_SORTSTATE"]);
@@ -80,14 +94,18 @@
                 }
 
                 $modtime=filemtime($file["tmp_name"]);
+                $hashid=hash("md5",$file["name"].$modtime.$file["size"]);
                 $filelist[]=array(
                     "name"=>$file["name"],
                     "size"=>humansize($file["size"]),
                     "asize"=>$file["size"],
                     "type"=>typeconvert($realfiletype),
+                    "ctype"=>$realfiletype,
                     "modtime"=>$modtime,
-                    "id"=>hash("md5",$file["name"].$modtime.$file["size"]) //this is a bad hash but whatever
+                    "id"=>$hashid //this is a bad hash but whatever
                 );
+
+                move_uploaded_file($file["tmp_name"],"../../../../cs433/read-write/p2/uploads/{$hashid}");
 
                 $resultsarray[]=array(
                     "status"=>"uploaded"
