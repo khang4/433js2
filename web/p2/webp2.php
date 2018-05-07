@@ -99,6 +99,28 @@
             echo json_encode($resultsarray);
         }
 
+        else if ($_SERVER["HTTP_METHOD"]=="delete")
+        {
+            $deleteid=file_get_contents("php://input");
+            $filelist=json_decode(@file_get_contents($filelistpath,true));
+
+            //a database would be better or atleast object but whatever
+            for ($x=0;$x<count($filelist);$x++)
+            {
+                if ($filelist[$x]->id==$deleteid)
+                {
+                    unset($filelist[$x]);
+                    break;
+                }
+            }
+
+            file_put_contents($filelistpath,json_encode(array_values($filelist)),LOCK_EX);
+
+            echo json_encode(array(
+                "status"=>"delete success"
+            ));
+        }
+
         else
         {
             echo json_encode(array(

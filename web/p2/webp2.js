@@ -84,6 +84,30 @@ function updatefilelist()
     });
 }
 
+function deleteid(id,callback)
+{
+    var r=new XMLHttpRequest();
+    r.open("POST","webp2.php");
+
+    // r.onreadystatechange=()=>{
+    //     if (r.readyState==4)
+    //     {
+    //         try
+    //         {
+    //             callback(JSON.parse(r.response));
+    //         }
+
+    //         catch (err)
+    //         {
+    //             console.log(r.response);
+    //         }
+    //     }
+    // };
+
+    r.setRequestHeader("method","delete");
+    r.send(id);
+}
+
 //give it single data entry from filelist
 function genfilelistentry(data)
 {
@@ -93,6 +117,17 @@ function genfilelistentry(data)
     data.modtime=`${data.modtime.toISOString().slice(0,10)} ${data.modtime.toTimeString().slice(0,8)}`;
 
     res.innerHTML=`<dl><dt>${data.name}</dt><dd>${data.size}</dd><dd class="type">${data.type}</dd><dd class="mod-time">${data.modtime}</dd><dd class="delete"><span>delete</span></dd></dl>`;
+
+    var deletebutton=res.firstElementChild.querySelector(".delete");
+
+    deletebutton.id=data.id;
+
+    deletebutton.addEventListener("click",(e)=>{
+        deleteid(e.currentTarget.id);
+
+        _filelist.removeChild(e.currentTarget.parentElement);
+    });
+
     return res.firstElementChild;
 }
 
