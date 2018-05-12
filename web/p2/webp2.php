@@ -72,6 +72,7 @@
 
             $finfo=finfo_open(FILEINFO_MIME_TYPE);
             $resultsarray=array();
+            $filecount=0;
             foreach ($_FILES as $file)
             {
                 $realfiletype=finfo_file($finfo,$file["tmp_name"]);
@@ -94,7 +95,8 @@
                 }
 
                 $modtime=filemtime($file["tmp_name"]);
-                $hashid=hash("md5",$file["name"].$modtime.$file["size"]);
+                $hashid=hash("md5",$file["name"].$modtime.$file["size"].$filecount);
+                $filecount++;
                 $filelist[]=array(
                     "name"=>$file["name"],
                     "size"=>humansize($file["size"]),

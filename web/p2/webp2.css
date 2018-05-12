@@ -66,6 +66,7 @@ dt,dd
     display: inline-block;
     width: 150px;
     margin: 0;
+    vertical-align: top;
 }
 
 dd.type
