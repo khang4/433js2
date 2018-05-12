@@ -76,7 +76,7 @@
             {
                 $realfiletype=finfo_file($finfo,$file["tmp_name"]);
                 $typeconvertfiletype=typeconvert($realfiletype);
-                if ($file["size"]>500000)
+                if ($file["size"]>50000)
                 {
                     $resultsarray[]=array(
                         "status"=>"invalidsize"
@@ -189,7 +189,7 @@
 
     function alphabetisename($file1,$file2)
     {
-        return strcmp($file1->name,$file2->name);
+        return strcmp(strtolower($file1->name),strtolower($file2->name));
     }
 
     function alphabetisetype($file1,$file2)
