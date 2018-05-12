@@ -123,7 +123,9 @@
         {
             $deleteid=file_get_contents("php://input");
             $filelist=json_decode(@file_get_contents($filelistpath,true));
+            $foundfile=0;
 
+            //only deletes if it finds the id to delete present in the filelist file
             //a database would be better or atleast object but whatever
             for ($x=0;$x<count($filelist);$x++)
             {
@@ -131,8 +133,17 @@
                 {
                     unlink("../../../../cs433/read-write/p2/uploads/{$deleteid}");
                     unset($filelist[$x]);
+                    $foundfile=1;
                     break;
                 }
+            }
+
+            if ($foundfile==0)
+            {
+                echo json_encode(array(
+                    "status"=>"delete fail"
+                ));
+                return;
             }
 
             file_put_contents($filelistpath,json_encode(array_values($filelist)),LOCK_EX);
